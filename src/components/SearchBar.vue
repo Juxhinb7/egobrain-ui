@@ -21,23 +21,36 @@ const disabledOnLoading = computed(() => {
 
 const submitPrompt = async () => {
   output.value = ''
+  message.value = ''
   console.log(apiKey.value);
 
   const json = JSON.stringify({ prompt: prompt.value, apiKey: apiKey.value })
   loading.value = true;
   
-  const response = await axios.post('https://egobrain-production.up.railway.app/streaming', json, {
-  responseType: 'stream',
-  headers: {
-    'Content-Type': 'application/json',
-    },
-  })
+  try {
+    const response = await axios.post('https://egobrain-production.up.railway.app/streaming', json, {
+    responseType: 'stream',
+    headers: {
+      'Content-Type': 'application/json',
+      },
+    })
 
     const stream = await response.data
 
     for await (const chunk of stream) {
       output.value += chunk
     }
+
+    if (output.value.startsWith("{'error':")) {
+      console.log("true it starts with {'error':", output.value);
+    }   
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      message.value = error.message;
+    }
+    
+  }
+
 
     emit('trigger', output.value)
     loading.value = false
@@ -84,7 +97,8 @@ const submitPrompt = async () => {
   </div>
 
 
-    <p class="text-center bg-red-200 rounded-lg mt-4">
+    <p v-if="message" class="text-center bg-red-200 rounded-lg mt-4 p-3">
+      <v-icon name="md-erroroutline" />
       {{ message }}
     </p>
     

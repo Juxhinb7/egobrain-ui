@@ -18,7 +18,8 @@ import { MdSendOutlined,
     MdAnalyticsOutlined,
     GiGiftOfKnowledge,
     BiPlusSquare,
-    LaGraduationCapSolid } from 'oh-vue-icons/icons'
+    LaGraduationCapSolid,
+    MdErroroutline } from 'oh-vue-icons/icons'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
 
 addIcons(
@@ -33,7 +34,8 @@ addIcons(
     MdAnalyticsOutlined ,
     GiGiftOfKnowledge,
     BiPlusSquare,
-    LaGraduationCapSolid
+    LaGraduationCapSolid,
+    MdErroroutline
 )
 
 const app = createApp(App)
