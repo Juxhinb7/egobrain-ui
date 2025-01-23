@@ -53,7 +53,7 @@ onMounted(() => {
 
       <div
         v-if="result"
-        class="border border-gray-300 rounded-xl w-fit max-w-[70%] h-fit overflow-y-scroll p-4 max-h-[95%]"
+        class="border border-gray-300 rounded-xl w-fit max-w-[70%] h-fit overflow-auto p-4 max-h-[95%]"
       >
         <div class="flex flex-row space-x-2">
           <div class="p-2 w-full" :style="{ 'font-size': fontSize + 'px' }">
